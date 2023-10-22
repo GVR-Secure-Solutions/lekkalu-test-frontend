@@ -46,7 +46,7 @@ class TestRegistration(unittest.TestCase):
 class TestLogin(unittest.TestCase):
     def setUp(self) -> None:
         options = Options()
-        #options.add_argument('--headless=new')
+        options.add_argument('--headless=new')
 
         self.driver = webdriver.Chrome(options=options)
 
