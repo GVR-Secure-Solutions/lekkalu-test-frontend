@@ -7,3 +7,5 @@ class LoginPageLocators():
     user_name = (By.ID, "username")
     password = (By.ID, "password")
     continue_button = "/html/body/div/div/div[2]/div[2]/div[1]/form/button"
+    user_name_error_message = "/html/body/div/div/div[2]/div[2]/div/form/p[1]"
+    pw_error_message = "/html/body/div/div/div[2]/div[2]/div/form/p[2]"

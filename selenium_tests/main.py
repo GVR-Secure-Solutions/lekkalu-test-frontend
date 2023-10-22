@@ -46,7 +46,7 @@ class TestRegistration(unittest.TestCase):
 class TestLogin(unittest.TestCase):
     def setUp(self) -> None:
         options = Options()
-        options.add_argument('--headless=new')
+        #options.add_argument('--headless=new')
 
         self.driver = webdriver.Chrome(options=options)
 
@@ -60,6 +60,12 @@ class TestLogin(unittest.TestCase):
         self.login_page = LoginPage(self.driver)
         alert_text = self.login_page.fill_out_login_form_to_get_alert_text()
         self.assertEqual(alert_text, "Network Error")
+
+    def test_login_with_username_less_than_6_characters(self):
+        self.login_page = LoginPage(self.driver)
+        user_name_error_msg, pw_error_msg = self.login_page.fill_out_login_form_to_get_error_messages("asd")
+        self.assertEqual(user_name_error_msg, "Please enter at least 6 characters")
+        self.assertEqual(pw_error_msg, "Password is required!")
 
 
 if __name__ == '__main__':
