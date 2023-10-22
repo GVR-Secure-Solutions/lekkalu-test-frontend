@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - "selenium-tests-and-github-ci"  
+      - "move_selenium_tests"  
   pull_request:
     branches:
       - "main" 
