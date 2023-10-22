@@ -29,14 +29,13 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
-    - run: cd lekkalu-frontend
-    - run: ls
+
     
     - run: npm install
+      working-directory: lekkalu-frontend
     - run: npm run start:qa &
+      working-directory: lekkalu-frontend
 
-    - run: cd ..
-    - run: ls
 
     - name: Install dependencies
       run: pip install -r selenium_tests/requirements.txt
