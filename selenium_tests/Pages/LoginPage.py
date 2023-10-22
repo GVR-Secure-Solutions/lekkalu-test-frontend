@@ -14,7 +14,7 @@ class LoginPage(BasePage):
 
     def fill_out_login_form_to_get_alert_text(self):
         self.click(LoginPageLocators.user_name)
-        self.enter_text(LoginPageLocators.user_name, "asd")
+        self.enter_text(LoginPageLocators.user_name, "Qweasd")
         self.click(LoginPageLocators.password)
         self.enter_text(LoginPageLocators.password, "123456789")
         self.find_element_and_click(By.XPATH, LoginPageLocators.continue_button)

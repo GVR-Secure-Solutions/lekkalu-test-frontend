@@ -13,7 +13,7 @@ class GetStartedPage(BasePage):
     def fill_out_registration_form_to_get_status_of_sign_up_button(self):
         # self.click(GetStartedPageLocators.get_started_link)
         self.click(GetStartedPageLocators.user_name)
-        self.enter_text(GetStartedPageLocators.user_name, "asd")
+        self.enter_text(GetStartedPageLocators.user_name, "Qweasd")
         self.click(GetStartedPageLocators.email)
         self.enter_text(GetStartedPageLocators.email, "asd@asd.com")
         self.click(GetStartedPageLocators.password)
