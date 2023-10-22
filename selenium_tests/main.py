@@ -42,6 +42,17 @@ class TestRegistration(unittest.TestCase):
         signup_button_enabled = self.get_started_page.fill_out_registration_form_to_get_status_of_sign_up_button()
         self.assertEqual(False, signup_button_enabled)
 
+
+class TestLogin(unittest.TestCase):
+    def setUp(self) -> None:
+        options = Options()
+        options.add_argument('--headless=new')
+
+        self.driver = webdriver.Chrome(options=options)
+
+    def tearDown(self):
+        self.driver.quit()
+
     def test_login_with_unregistered_user(self):
         """
          Test login with an unregistered user.
