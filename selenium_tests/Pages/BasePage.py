@@ -1,4 +1,4 @@
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -25,6 +25,10 @@ class BasePage():
 
     def find_element(self, by_what, by_locator):
         return self.driver.find_element(by_what, by_locator)
+
+    def clear_text(self, by_locator):
+        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(by_locator)).send_keys(Keys.CONTROL + "a")
+        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable(by_locator)).send_keys(Keys.DELETE)
 
     def enter_text(self, by_locator, text):
         """ Performs text entry of the passed in text, in a web element whose locator is passed to it"""

@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 
 from Pages.BasePage import BasePage
@@ -18,9 +20,9 @@ class GetStartedPage(BasePage):
         self.enter_text(GetStartedPageLocators.email, "asd@asd.com")
         self.click(GetStartedPageLocators.password)
         self.enter_text(GetStartedPageLocators.password, "123456789")
-        self.find_element_and_click(By.NAME, GetStartedPageLocators.terms_and_conditions)
-        self.find_element_and_click(By.NAME, GetStartedPageLocators.privacy_policy)
-        sign_up_button = self.find_element(By.XPATH, GetStartedPageLocators.signup_button)
-        self.find_element_and_click(By.XPATH, GetStartedPageLocators.signup_button)
-
-        return sign_up_button.is_enabled()
+        self.click(GetStartedPageLocators.terms_and_conditions)
+        self.click(GetStartedPageLocators.privacy_policy)
+        self.click(GetStartedPageLocators.signup_button)
+        time.sleep(3)
+        alert_title = self.find_element(By.XPATH, GetStartedPageLocators.error_message_title).text
+        return alert_title
