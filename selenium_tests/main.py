@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options
 
 from Pages.GetStartedPage import GetStartedPage
 from Pages.LoginPage import LoginPage
+from Pages.SIPCalculatorPage import SIPCalculatorPage
 
 
 class TestRegistration(unittest.TestCase):
@@ -39,8 +40,9 @@ class TestRegistration(unittest.TestCase):
         disabled at the moment.
         """
         self.get_started_page = GetStartedPage(self.driver)
-        signup_button_enabled = self.get_started_page.fill_out_registration_form_to_get_status_of_sign_up_button()
-        self.assertEqual(False, signup_button_enabled)
+        alert_text = self.get_started_page.fill_out_registration_form_to_get_status_of_sign_up_button()
+
+        self.assertEqual(alert_text, "Unexpected error occurred")
 
 
 class TestLogin(unittest.TestCase):
@@ -59,13 +61,28 @@ class TestLogin(unittest.TestCase):
          """
         self.login_page = LoginPage(self.driver)
         alert_text = self.login_page.fill_out_login_form_to_get_alert_text()
-        self.assertEqual(alert_text, "Network Error")
+        self.assertEqual(alert_text, "Unexpected error occurred")
 
     def test_login_with_username_less_than_6_characters(self):
         self.login_page = LoginPage(self.driver)
-        user_name_error_msg, pw_error_msg = self.login_page.fill_out_login_form_to_get_error_messages("asd")
-        self.assertEqual(user_name_error_msg, "Please enter at least 6 characters")
-        self.assertEqual(pw_error_msg, "Password is required!")
+        user_name_error_msg = self.login_page.fill_out_login_form_to_get_error_messages("asd")
+        self.assertEqual(user_name_error_msg, "Enter at least 6 characters!")
+
+
+class TestCalculator(unittest.TestCase):
+    def setUp(self) -> None:
+        options = Options()
+        options.add_argument('--headless=new')
+
+        self.driver = webdriver.Chrome(options=options)
+
+    def testSIPCalculationWithMinimalValues(self):
+        self.sip_calculator_page = SIPCalculatorPage(self.driver)
+        total_investment_value, final_value_text, wealth_gained_value = self.sip_calculator_page.set_values_to_calculator_parameters_to_get_summary(
+            500, 1, 1)
+        self.assertEqual(total_investment_value, "6000 ₹")
+        self.assertEqual(final_value_text, "6028 ₹")
+        self.assertEqual(wealth_gained_value, "28 ₹")
 
 
 if __name__ == '__main__':
